@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Disorder Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Sleep Disorder Prediction</h1>
+    <form action="/predict" method="POST">
+        <label>Gender:</label>
+        <select name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="0">Female</option>
+            <option value="1">Male</option>
+        </select>
+
+        <label>Age:</label>
+        <input type="number" name="age" required>
+
+        <label>Occupation:</label>
+        <select name="occupation" required>
+            <option value="">Select Occupation</option>
+            <option value="1">Software Engineer</option>
+            <option value="2">Doctor</option>
+            <option value="3">Sales Representative</option>
+            <option value="4">Teacher</option>
+            <option value="5">Nurse</option>
+        </select>
+
+        <label>Sleep Duration (hours):</label>
+        <input type="number" step="0.1" name="sleep_duration" required>
+
+        <label>Quality of Sleep (1-10 scale):</label>
+        <input type="number" name="quality_of_sleep" required>
+
+        <label>Physical Activity Level:</label>
+        <input type="number" name="physical_activity_level" required>
+
+        <label>Stress Level (1-10 scale):</label>
+        <input type="number" name="stress_level" required>
+
+        <label>BMI Category:</label>
+        <select name="bmi_category" required>
+            <option value="">Select BMI Category</option>
+            <option value="1">Underweight</option>
+            <option value="2">Normal Weight</option>
+            <option value="3">Overweight</option>
+            <option value="4">Obese</option>
+        </select>
+
+        <label>Heart Rate:</label>
+        <input type="number" name="heart_rate" required>
+
+        <label>Daily Steps:</label>
+        <input type="number" name="daily_steps" required>
+
+        <label>Blood Pressure Upper:</label>
+        <input type="number" name="blood_pressure_upper" required>
+
+        <label>Blood Pressure Lower:</label>
+        <input type="number" name="blood_pressure_lower" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        <h2>Prediction Result: {{ prediction }}</h2>
+        <h3>Your Input Details:</h3>
+        <ul>
+            <li><b>Gender:</b> {{ details.gender }}</li>
+            <li><b>Age:</b> {{ details.age }}</li>
+            <li><b>Occupation:</b> {{ details.occupation }}</li>
+            <li><b>Sleep Duration:</b> {{ details.sleep_duration }} hours</li>
+            <li><b>Quality of Sleep:</b> {{ details.quality_of_sleep }}/10</li>
+            <li><b>Physical Activity Level:</b> {{ details.physical_activity_level }}</li>
+            <li><b>Stress Level:</b> {{ details.stress_level }}/10</li>
+            <li><b>BMI Category:</b> {{ details.bmi_category }}</li>
+            <li><b>Heart Rate:</b> {{ details.heart_rate }} BPM</li>
+            <li><b>Daily Steps:</b> {{ details.daily_steps }}</li>
+            <li><b>Blood Pressure:</b> {{ details.blood_pressure_upper }}/{{ details.blood_pressure_lower }}</li>
+        </ul>
+    </div>
+    {% endif %}
+
+</body>
+</html>
